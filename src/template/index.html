@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Simulação do robo digital</title>
+
+<!-- Custom fonts for this template -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap"
+	rel="stylesheet"
+/>
+
+<link
+	rel="stylesheet"
+	href="{{ url_for('static', filename = 'style.css') }}"
+/>
+<link rel="stylesheet" href="/src/static/style.css">
+</head>
+
+<body>
+    <header>Insira as posições das coordenadas:</header>
+    <div class="main">
+        <div class="inputX">
+            <h1>Insira x:</h1>
+            <input type="text" placeholder="Posição x" id="inputX">
+        </div>
+        <div class="inputY">
+            <h1>Insira y:</h1>
+            <input type="text" placeholder="Posição y" id="inputY">
+        </div>
+        <div class="inputZ">
+            <h1>Insira z:</h1>
+            <input type="text" placeholder="Posição z" id="inputZ">
+        </div>
+        <div class="inputJ1">
+            <h1>Insira j1:</h1>
+            <input type="text" placeholder="Posição j1" id="inputJ1">
+        </div>
+        <div class="inputJ2">
+            <h1>Insira j2:</h1>
+            <input type="text" placeholder="Posição j2" id="inputJ2">
+        </div>
+        <div class="inputJ3">
+            <h1>Insira j3:</h1>
+            <input type="text" placeholder="Posição j3" id="inputJ3">
+        </div>
+    </div>
+    <button onclick="newPosition()">Enviar</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
