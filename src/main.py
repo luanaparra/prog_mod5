@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, request
 from flask_sqlalchemy import SQLAlchemy
-from flask_script import Manager
+# from flask_script import Manager
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///coordenate.db'
@@ -32,8 +32,8 @@ def coord():
     db.session.commit()
     return redirect('/')
 
-manager = Manager(app)
+# manager = Manager(app)
 
 if __name__ == '__main__':
-    manager.run()
+    # manager.run()
     app.run(host='0.0.0.0', port=3000, debug=True)
