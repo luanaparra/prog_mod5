@@ -1,56 +1,54 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Simulação do robo digital</title>
-
-<!-- Custom fonts for this template -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link
-	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap"
-	rel="stylesheet"
-/>
-
-<link
-	rel="stylesheet"
-	href="{{ url_for('static', filename = 'style.css') }}"
-/>
-<link rel="stylesheet" href="/src/static/style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulação robô digital</title>
+    <link rel="stylesheet" href="{{url_for('static', filename = 'style.css')}}">
 </head>
 
 <body>
-    <header>Insira as posições das coordenadas:</header>
-    <div class="main">
-        <div class="inputX">
-            <h1>Insira x:</h1>
-            <input type="text" placeholder="Posição x" id="inputX">
+    <form method="post" action="/coords">
+        <div class="main-content">
+            <div class="main-left">
+                <div class="coord-group">
+                    <label for="x">X</label>
+                    <input type="text" id="x" name="x" value="">
+                </div>
+                <div class="coord-group">
+                    <label for="y">Y</label>
+                    <input type="text" id="y" name="y" value="">
+                </div>
+                <div class="coord-group">
+                    <label for="z">Z</label>
+                    <input type="text" id="z" name="z" value="">
+                </div>
+                <div class="coord-group">
+                    <label for="r">R</label>
+                    <input type="text" id="r" name="r" value="">
+                </div>
+            </div>
+            <div>
+                <div class="coord-group">
+                    <label for="x-current">X</label>
+                    <p id="x-current">{{coordenate[(coordenate|length-1)].x}}</p>
+                </div>
+                <div class="coord-group">
+                    <label for="y-current">Y</label>
+                    <p id="y-current">{{coordenate[(coordenate|length-1)].y}}</p>
+                </div>
+                <div class="coord-group">
+                    <label for="z-current">Z</label>
+                    <p id="z-current">{{coordenate[(coordenate|length-1)].z}}</p>
+                </div>
+                <div class="coord-group">
+                    <label for="r-current">R</label>
+                    <p id="r-current">{{coordenate[(coordenate|length-1)].r}}</p>
+                </div>
+            </div>
+            <button type="submit">Enviar</button>
         </div>
-        <div class="inputY">
-            <h1>Insira y:</h1>
-            <input type="text" placeholder="Posição y" id="inputY">
-        </div>
-        <div class="inputZ">
-            <h1>Insira z:</h1>
-            <input type="text" placeholder="Posição z" id="inputZ">
-        </div>
-        <div class="inputJ1">
-            <h1>Insira j1:</h1>
-            <input type="text" placeholder="Posição j1" id="inputJ1">
-        </div>
-        <div class="inputJ2">
-            <h1>Insira j2:</h1>
-            <input type="text" placeholder="Posição j2" id="inputJ2">
-        </div>
-        <div class="inputJ3">
-            <h1>Insira j3:</h1>
-            <input type="text" placeholder="Posição j3" id="inputJ3">
-        </div>
-    </div>
-    <button onclick="newPosition()">Enviar</button>
-
-    <script src="script.js"></script>
+    </form>
 </body>
 </html>
-

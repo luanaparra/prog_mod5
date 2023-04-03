@@ -1,34 +1,39 @@
 from flask import Flask, render_template, redirect, request
-
-import asyncio
-from datetime import datetime
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session, sessionmaker
-from models.base import Base
-from models.coordenate import Coordenate
+from flask_sqlalchemy import SQLAlchemy
+from flask_script import Manager
 
 app = Flask(__name__)
-
-header = []
-engine = create_engine("sqlite+pysqlite:///coordenates.db", echo=True)
-Session = sessionmaker(bind = engine)
-session = Session()
-
-Base.metadata.create_all(engine)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///coordenate.db'
+db = SQLAlchemy(app)
+class Coordenate(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    x = db.Column(db.Integer)
+    y = db.Column(db.Integer)
+    z = db.Column(db.Integer)
+    r = db.Column(db.Integer)
+@app.cli.command()
+def createdb():
+    db.create_all()
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    Coordenates = Coordenate.query.all()
+    return render_template('index.html', Coordenates=Coordenates)
 
-@app.route('/post', methods=["POST"])
-def postForm():
-    print(request.form)
-    c1 = Coordenate(x=request.form['x'], y=request.form['y'], z=request.form['z'])
+@app.route('/coord', methods=['POST'])
+def coord():
+    coord = Coordenate(
+        x = request.form['x'],
+        y = request.form['y'],
+        z = request.form['z'],
+        r = request.form['r']
+    )
+    db.session.add(coord)
+    db.session.commit()
+    return redirect('/')
 
+manager = Manager(app)
 
-    session.add(c1)
-    session.commit()
-    return render_template('index.html', x=request.form['x'], y=request.form['y'], z=request.form['z'])
-
-
-app.run(host = '0.0.0.0', port=3000, debug=True)
+if __name__ == '__main__':
+    manager.run()
+    app.run(host='0.0.0.0', port=3000, debug=True)
